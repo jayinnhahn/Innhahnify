@@ -1,54 +1,23 @@
 'use client';
 import { useEffect, useState } from 'react';
 import LoginPage from '@/components/LoginPage';
-import axios, { AxiosError } from 'axios';
 import HomePage from '@/components/HomePage';
 interface SpotifyConfig {
-	CLIENT_ID: string;
-	REDIRECT_URL: string;
-	AUTH_ENDPOINT: string;
+	CLIENT_ID?: string;
+	REDIRECT_URL?: string;
+	AUTH_ENDPOINT?: string;
 	RESPONSE_TYPE: string;
 }
 
-const fetchDataFromSpotify = async (
-	accessToken: string,
-	timeRange: string
-): Promise<any> => {
-	try {
-		const response = await axios.get('http://localhost:3000/api/spotify', {
-			// headers: {
-			// 	Authorization: 'Bearer ' + accessToken,
-			// },
-			params: {
-				time_range: timeRange,
-				access_token: accessToken,
-			},
-		});
-
-		return response.data;
-	} catch (error) {
-		console.error('Error fetching top users and tracks:', error);
-
-		if (axios.isAxiosError(error)) {
-			const axiosError = error as AxiosError;
-			console.error('Response status:', axiosError.response?.status);
-			console.error('Response data:', axiosError.response?.data);
-		}
-
-		throw error;
-	}
-};
-
 const Home: React.FC = () => {
 	const SpotifiyConfigData: SpotifyConfig = {
-		CLIENT_ID: '4621d4797def4a7ca7d70507fac9a08b',
-		REDIRECT_URL: 'http://localhost:3000',
-		AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
+		CLIENT_ID: process.env.NEXT_PUBLIC_CLIENT_ID,
+		REDIRECT_URL: process.env.NEXT_PUBLIC_REDIRECT_URL,
+		AUTH_ENDPOINT: process.env.NEXT_PUBLIC_AUTH_ENDPOINT,
 		RESPONSE_TYPE: 'token',
 	};
 
 	const [token, setToken] = useState<string | null>('');
-	const [timeRange, setTimeRange] = useState<string>('medium_term');
 
 	useEffect(() => {
 		const hash = window.location.hash;
@@ -74,23 +43,6 @@ const Home: React.FC = () => {
 	const logout = () => {
 		setToken('');
 		window.localStorage.removeItem('token');
-	};
-
-	const fetchTopTracks = async () => {
-		try {
-			if (token !== null) {
-				const accessToken = token;
-				const topTracksData = await fetchDataFromSpotify(
-					accessToken,
-					timeRange
-				);
-				console.log(topTracksData);
-			} else {
-				console.error('Access token is null.');
-			}
-		} catch (error) {
-			// Handle the error if needed
-		}
 	};
 
 	return (

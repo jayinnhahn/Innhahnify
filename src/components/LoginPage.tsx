@@ -5,9 +5,9 @@ import AboutModal from './AboutModal';
 import PrivacyPolicySection from './PrivacyPolicySection';
 interface LoginPageProps {
 	data: {
-		CLIENT_ID: string;
-		REDIRECT_URL: string;
-		AUTH_ENDPOINT: string;
+		CLIENT_ID?: string;
+		REDIRECT_URL?: string;
+		AUTH_ENDPOINT?: string;
 		RESPONSE_TYPE: string;
 	};
 }
@@ -18,7 +18,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 	};
 	return (
 		<div>
-			<div className="bg-beige w-full pt-5">
+			<div className="bg-beige w-full pt-5 scroll-smooth">
 				<div className="flex justify-center">
 					<h1 className="text-darkgreen font-Monotage text-center text-newgreen lg:text-[11rem] tracking-wide font-bold lg:w-[48rem] leading-none ">
 						FIND YOUR TOP TRACKS
@@ -33,7 +33,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 				<AboutModal />
 			</div>
 			<Breaker />
-			<PrivacyPolicySection />
+			<div className="px-20">
+				<PrivacyPolicySection />
+			</div>
 		</div>
 	);
 };
