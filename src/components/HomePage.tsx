@@ -55,23 +55,27 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 				<h1 className="text-darkgreen font-Monotage text-center text-newgreen lg:text-[8rem] tracking-wide font-bold  leading-none ">
 					INPUT THE NECESSARY DETAILS
 				</h1>
-
-				<div className="px-20">
-					<WrappedForm
-						category={category}
-						timeRange={timeRange}
-						setCategory={setCategory}
-						setTimeRange={setTimeRange}
-						fetchTopTracks={fetchTopTracks}
-					/>
+				<div className="grid grid-cols-2 px-20">
+					<div>
+						<ResultsModal
+							top5Tracks={top5Tracks}
+							top5Artists={top5Artists}
+							category={category}
+							timeRange={timeRange}
+						/>
+					</div>
+					<div>
+						<WrappedForm
+							category={category}
+							timeRange={timeRange}
+							setCategory={setCategory}
+							setTimeRange={setTimeRange}
+							fetchTopTracks={fetchTopTracks}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="flex justify-center">
-				<ResultsModal
-					top5Tracks={top5Tracks}
-					top5Artists={top5Artists}
-					category={category}
-				/>
 				<button onClick={logout}> logoui</button>
 			</div>
 		</div>
