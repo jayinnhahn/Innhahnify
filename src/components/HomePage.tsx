@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import LandingPageModal from './LandingPageModal';
 import Breaker from './Breaker';
-import { fetchDataFromSpotify } from '@/app/api/spotify/route';
+import { fetchDataFromSpotify } from '@/app/api/spotify/fetchdata/route';
+
 import WrappedForm from './WrappedForm';
 import ResultsModal from './ResultsModal';
 import html2canvas from 'html2canvas';
@@ -11,6 +12,17 @@ import Typewriter from 'typewriter-effect';
 interface HomePageProps {
 	logout: () => void;
 	token: string | null;
+}
+
+interface SpotifyItem {
+	name: string;
+	artists: { name: string }[];
+	album: {
+		images: { url: string }[];
+	};
+}
+interface SpotifyResponse {
+	items: SpotifyItem[];
 }
 
 const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
@@ -78,6 +90,14 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	useEffect(() => {
 		fetchTopTracks();
 	}, [token, timeRange, category, fetchTopTracks]);
+
+	useEffect(() => {
+		const fetchTopTracks = async () => {
+			// ... existing fetchTopTracks logic ...
+		};
+
+		fetchTopTracks();
+	}, [token, timeRange, category]);
 
 	const downloadDivContent = async (contentElement) => {
 		// Clone the content and append it to the document body

@@ -1,23 +1,14 @@
-import axios from 'axios';
+import fetchDataFromSpotify from '../spotify/fetchdata/route';
 
-export const fetchDataFromSpotify = async (
-	accessToken,
-	timeRange,
-	category
-) => {
+export default async function handler(req, res) {
+	const { accessToken, timeRange, category } = req.query;
+
 	try {
-		const url = `https://api.spotify.com/v1/me/top/${category}`;
-		const queryParams = `time_range=${timeRange}&limit=5&offset=0`;
-		const response = await axios.get(`${url}?${queryParams}`, {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				'Content-Type': 'application/json',
-			},
-		});
+		const data = await fetchDataFromSpotify(accessToken, timeRange, category);
 
-		return response.data;
+		res.status(200).json(data);
 	} catch (error) {
 		console.error('Error fetching top users and tracks:', error);
-		throw error;
+		res.status(500).json({ error: 'Internal Server Error' });
 	}
-};
+}
