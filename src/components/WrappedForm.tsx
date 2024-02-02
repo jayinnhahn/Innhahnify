@@ -1,89 +1,101 @@
 import React from 'react';
-
+import LogoImage from '../../public/Image/Jwrppedlogo.png';
+import Image from 'next/image';
 interface WrappedFormProps {
 	category: string;
 	timeRange: string;
 	setCategory: React.Dispatch<React.SetStateAction<string>>;
 	setTimeRange: React.Dispatch<React.SetStateAction<string>>;
-	fetchTopTracks: () => void;
 }
+
 const timeRangeOptions = [
 	{ label: 'A Month', value: 'short_term' },
 	{ label: '6 Months', value: 'medium_term' },
 	{ label: 'All Time', value: 'long_term' },
 ];
+
 const WrappedForm: React.FC<WrappedFormProps> = ({
 	category,
 	timeRange,
 	setCategory,
 	setTimeRange,
-	fetchTopTracks,
 }) => {
 	return (
-		<div className="grid content-between bg-neworange rounded-[40px] h-fit px-16 py-8 gap-4 m-10">
-			<h2 className="text-white font-Monotage text-left text-newgreen lg:text-[3rem] font-normal leading-none">
+		<div className="grid bg-green rounded-[40px] w-full px-4 py-4 lg:px-16 lg:py-16 lg:h-fit">
+			<div className="flex flex-col items-center justify-center ">
+				<div className="relative h-20 w-20 ">
+					<Image
+						src={LogoImage}
+						alt="Jay Picture"
+						className="object-cover"
+						draggable={false}
+						fill
+					/>
+				</div>
+				<h1 className="text-beige font-Monotage text-center text-newgreen text-[1.5rem] lg:text-[2rem] font-normal leading-none lg:my-2">
+					CUSTOMIZE YOUR JWRAPPED
+				</h1>
+			</div>
+			<hr className="lg:border-4 border-2 border-beige my-4 lg:my-6" />
+
+			<h2 className="text-beige font-Monotage text-left text-newgreen text-[1.5rem] lg:text-[3rem] font-normal leading-none mb-4">
 				WHAT CATEGORY WOULD YOU LIKE?
 			</h2>
-			<div className="flex ml-4">
+			<div className="flex ml-4 mb-4">
 				<button
-					className={`px-10 py-2 text-[2rem] font-Monotage rounded-l-[15px] border-4 border-darkgreen ${
-						category === 'artists'
-							? 'bg-white text-darkgreen'
-							: 'bg-darkgreen text-white'
+					className={`px-4 py-2 text-[1rem] rounded-l-[5px] lg:px-10  lg:text-[2rem] font-Monotage lg:rounded-l-[15px] lg:border-4 border-darkgreen ${
+						category === 'tracks'
+							? 'bg-darkgreen text-white'
+							: 'bg-white text-darkgreen'
 					}`}
 					onClick={() => setCategory('tracks')}
 				>
 					Top Tracks
 				</button>
 				<button
-					className={`px-10 py-2 text-[2rem] font-Monotage rounded-r-[15px] border-4 border-darkgreen ${
-						category === 'tracks'
-							? 'bg-white text-darkgreen'
-							: 'bg-darkgreen text-white'
+					className={`px-4 py-2 text-[1rem] rounded-r-[5px] lg:px-10 lg:text-[2rem] font-Monotage lg:rounded-r-[15px] lg:border-4 border-darkgreen ${
+						category === 'artists'
+							? 'bg-darkgreen text-white'
+							: 'bg-white text-darkgreen'
 					}`}
 					onClick={() => setCategory('artists')}
 				>
 					Top Artists
 				</button>
 			</div>
-
-			<h2 className="text-white font-Monotage text-left text-newgreen lg:text-[4rem] font-normal lg:w-[48rem] leading-none ">
-				what time period would your wrapped consists of?{' '}
-			</h2>
-			<form className="flex">
-				{timeRangeOptions.map(({ label, value }) => (
-					<div
-						key={value}
-						className={`flex py-[0.5rem] px-[4rem] rounded-[15px] font-Monotage lg:text-[1.5rem] border-2 border-round mx-2 border-darkgreen
+			<div className="flex flex-col">
+				<h2 className="text-beige font-Monotage text-left text-[1.5rem] lg:text-[3rem] font-normal leading-none mb-4">
+					What time period would your wrapped consist of?
+				</h2>
+				<div className="flex gap-4 mb-4">
+					{timeRangeOptions.map(({ label, value }) => (
+						<div
+							key={value}
+							className={`flex py-[0.5rem] px-[1rem] lg:px-[3rem] rounded-[10px] lg:rounded-[15px] font-Monotage border-2 border-round border-darkgreen
               ${
 								timeRange === value
 									? 'bg-darkgreen text-white'
-									: 'bg-white text-darkgreen'
+									: 'bg-white text-darkgreen cursor-pointer'
 							}`}
-					>
-						<input
-							type="radio"
-							id={value}
-							checked={timeRange === value}
-							onChange={() => setTimeRange(value)}
-							style={{ display: 'none' }}
-						/>
-						<label
-							htmlFor={value}
-							className="block ml-2 font-medium cursor-pointer "
+							onClick={() => setTimeRange(value)}
 						>
-							{label}
-						</label>
-					</div>
-				))}
-			</form>
-
-			<button
-				onClick={fetchTopTracks}
-				className="font-Monotage w-fit  text-darkgreen bg-white border-4  border-darkgreen lg:text-[1.5rem] px-20 rounded-[10px] mt-4"
-			>
-				Submit
-			</button>
+							<input
+								type="radio"
+								id={value}
+								checked={timeRange === value}
+								onChange={() => {}}
+								style={{ display: 'none' }}
+							/>
+							<label
+								htmlFor={value}
+								className="block lg:text-[1.5rem] font-medium"
+							>
+								{label}
+							</label>
+						</div>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

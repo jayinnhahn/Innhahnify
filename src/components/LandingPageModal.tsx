@@ -8,7 +8,7 @@ interface LandingPageModalProps {
 }
 const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 	return (
-		<div className="relative flex justify-center lg:h-[40rem] rounded-3xl">
+		<div className="relative flex justify-center px-4 py-4 h-[25rem] lg:h-[40rem] rounded:2xl lg:rounded-3xl">
 			<Image
 				src={LandingPageImage}
 				alt="RecWeekHeaderImage"
@@ -18,11 +18,11 @@ const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 				fill
 			/>
 			<div className="flex flex-col justify-center items-center z-10 text-white">
-				<h1 className="font-Monotage text-center lg:w-[50rem] lg:text-[6rem] tracking-normal leading-none font-light mb-2">
-					KNOW WHO YOUR FAVORITE ARTISTS ARE
+				<h1 className="font-Monotage text-center text-[3rem] lg:w-[50rem] lg:text-[6rem] tracking-normal leading-none font-light mb-2">
+					GET YOU JWRAPPED HERE
 				</h1>
 				<div className="font-Roboto font-light lg:text-[1.5rem] text-center ">
-					Click on the button below to know more about Jayify
+					Click on the button to get your top tracks or top artists.
 				</div>
 
 				<button

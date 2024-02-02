@@ -3,6 +3,9 @@ import LandingPageModal from './LandingPageModal';
 import Breaker from './Breaker';
 import AboutModal from './AboutModal';
 import PrivacyPolicySection from './PrivacyPolicySection';
+import ContactMe from './ContactMe';
+import Typewriter from 'typewriter-effect';
+
 interface LoginPageProps {
 	data: {
 		CLIENT_ID?: string;
@@ -19,23 +22,31 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 	return (
 		<div>
 			<div className="bg-beige w-full pt-5 scroll-smooth">
-				<div className="flex justify-center">
-					<h1 className="text-darkgreen font-Monotage text-center text-newgreen lg:text-[11rem] tracking-wide font-bold lg:w-[48rem] leading-none ">
-						FIND YOUR TOP TRACKS
+				<div className="flex flex-col align-center items-center justify-center">
+					<h1 className="text-darkgreen font-Monotage text-center text-newgreen text-[4rem] md:text-[6rem] lg:text-[11rem] tracking-wide font-bold lg:w-[48rem] leading-none mb-5 ">
+						FIND YOUR
+						<Typewriter
+							options={{
+								strings: ['TOP TRACKS', 'TOP ARTISTS'],
+								autoStart: true,
+								loop: true,
+							}}
+						/>
 					</h1>
 				</div>
-				<div className="px-20">
+				<div className="px-4 md:px-8 lg:px-20">
 					<LandingPageModal onLogin={handleLogin} />
 				</div>
 			</div>
 			<Breaker />
-			<div className="px-20">
+			<div className="px-4 md:px-8 lg:px-20">
 				<AboutModal />
 			</div>
 			<Breaker />
-			<div className="px-20">
+			<div className="px-4 md:px-8 lg:px-20">
 				<PrivacyPolicySection />
 			</div>
+			<ContactMe />
 		</div>
 	);
 };
