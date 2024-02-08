@@ -1,70 +1,26 @@
 import React from 'react';
 import PictureImage from '../../public/Image/picture.jpg';
 import { FaFacebookF, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
-
 import Image from 'next/image';
 
 const socialIconsData = [
 	{
 		url: 'https://www.facebook.com/jayinnhahn',
 		label: 'Facebook',
+		icon: FaFacebookF,
 	},
 	{
 		url: 'https://www.instagram.com/innhahn',
 		label: 'Instagram',
+		icon: FaInstagram,
 	},
-	{
-		url: 'https://github.com/jayinnhahn',
-		label: 'Github',
-	},
+	{ url: 'https://github.com/jayinnhahn', label: 'Github', icon: FaGithub },
 	{
 		url: 'https://www.linkedin.com/in/jayinnhahn/',
 		label: 'Linkedin',
+		icon: FaLinkedin,
 	},
 ];
-
-function renderIcon(socialName: string) {
-	switch (socialName.toUpperCase()) {
-		case 'FACEBOOK':
-			return (
-				<FaFacebookF
-					className={
-						'w-[1.26525rem] h-[1.26525rem] md:w-[1.69075rem] md:h-[1.69075rem] lg:w-[1.69075rem] lg:h-[1.69075rem] hover:-translate-y-0.5 transition duration-150 ease-out active:ease-in active:text-neworange'
-					}
-				/>
-			);
-
-		case 'INSTAGRAM':
-			return (
-				<FaInstagram
-					className={
-						'w-[1.26525rem] h-[1.26525rem] md:w-[1.69075rem] md:h-[1.69075rem] lg:w-[1.69075rem] lg:h-[1.69075rem] hover:-translate-y-0.5 transition duration-150 ease-out active:ease-in active:text-neworange'
-					}
-				/>
-			);
-
-		case 'GITHUB':
-			return (
-				<FaGithub
-					className={
-						'w-[1.26525rem] h-[1.26525rem] md:w-[1.69075rem] md:h-[1.69075rem] lg:w-[1.69075rem] lg:h-[1.69075rem] hover:-translate-y-0.5 transition duration-150 ease-out active:ease-in active:text-neworange'
-					}
-				/>
-			);
-
-		case 'LINKEDIN':
-			return (
-				<FaLinkedin
-					className={
-						'w-[1.26525rem] h-[1.26525rem] md:w-[1.69075rem] md:h-[1.69075rem] lg:w-[1.69075rem] lg:h-[1.69075rem] hover:-translate-y-0.5 transition duration-150 ease-out active:ease-in active:text-neworange'
-					}
-				/>
-			);
-
-		default:
-			throw 'NotFound';
-	}
-}
 
 const ContactMe = () => {
 	return (
@@ -80,7 +36,10 @@ const ContactMe = () => {
 					</p>
 				</div>
 				<div className="lg:my-20 my-10 flex justify-center md:justify-self-end">
-					<a href="https://open.spotify.com/user/12140322647">
+					<a
+						href="https://open.spotify.com/user/12140322647"
+						aria-label="Link to Spotify profile"
+					>
 						<div className="relative h-60 w-60 rounded-full border-4 border-darkgreen align-top hover:animate-spin">
 							<Image
 								src={PictureImage}
@@ -101,7 +60,8 @@ const ContactMe = () => {
 					<div className="grid grid-flow-col w-fit gap-x-5 mt-2 md:ml-auto text-beige">
 						{socialIconsData.map((iconData, index) => (
 							<a href={iconData.url} key={index} aria-label={iconData.label}>
-								{renderIcon(iconData.label)}
+								<iconData.icon className="w-[1.26525rem] h-[1.26525rem] md:w-[1.69075rem] md:h-[1.69075rem] lg:w-[1.69075rem] lg:h-[1.69075rem] hover:-translate-y-0.5 transition duration-150 ease-out active:ease-in active:text-neworange" />
+								<span className="sr-only">{iconData.label}</span>
 							</a>
 						))}
 					</div>

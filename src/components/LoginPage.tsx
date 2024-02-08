@@ -1,9 +1,9 @@
 import React from 'react';
-import LandingPageModal from './LandingPageModal';
-import Breaker from './Breaker';
-import AboutModal from './AboutModal';
-import PrivacyPolicySection from './PrivacyPolicySection';
-import ContactMe from './ContactMe';
+import LandingPageModal from '@/components/LandingPageModal';
+import Breaker from '@/components/Breaker';
+import AboutModal from '@/components/AboutModal';
+import PrivacyPolicySection from '@/components/PrivacyPolicySection';
+import ContactMe from '@/components/ContactMe';
 import Typewriter from 'typewriter-effect';
 
 interface LoginPageProps {

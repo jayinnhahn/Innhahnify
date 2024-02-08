@@ -30,24 +30,6 @@ const ShowUsersTopValues: React.FC<ShowUsersTopValuesProps> = ({ users }) => {
 			console.error('Error fetching top users and tracks:', error);
 		}
 	};
-	// const fetchTopArtists = async () => {
-	// 	try {
-	// 		const accessTokens = users.map((user) => user.userId);
-
-	// 		const response = await axios.get(`/api/spotify/top-users`, {
-	// 			params: {
-	// 				access_tokens: accessTokens,
-	// 				time_range: timeRange,
-	// 			},
-	// 		});
-
-	// 		const topArtistsData = response.data;
-
-	// 		console.log(topArtistsData);
-	// 	} catch (error) {
-	// 		console.error('Error fetching top users and tracks:', error);
-	// 	}
-	// };
 
 	return (
 		<div>

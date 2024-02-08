@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import LogoImage from '../../public/Image/Jwrppedlogo.png';
 import SpotifyLogo from '../../public/Image/spotifylogo.png';
 interface ResultsModalProps {
 	top5Tracks: string[];

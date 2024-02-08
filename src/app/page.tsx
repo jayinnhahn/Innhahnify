@@ -55,22 +55,6 @@ const Home: React.FC = () => {
 			) : (
 				<div className="w-full">
 					<HomePage logout={logout} token={token} />
-					{/* <p> {token}</p>
-						<button onClick={logout}>Logout</button>
-						<div>
-				 			<h2>Top Users and Their Tracks</h2>
-							<label htmlFor="timeRange">Select Time Range:</label>
-							<select
-								id="timeRange"
-								value={timeRange}
-								onChange={(e) => setTimeRange(e.target.value)}
-							>
-								<option value="short_term">3 months</option>
-								<option value="medium_term">6 months</option>
-								<option value="long_term">1 year</option>
-							</select>
-							<button onClick={fetchTopTracks}>Fetch Top Tracks</button>
-						</div> */}
 				</div>
 			)}
 		</main>
