@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import WrappedForm from '@/components/WrappedForm';
 import ResultsModal from '@/components/ResultsModal';
+import ContactMe from '@/components/ContactMe';
 import html2canvas from 'html2canvas';
 
 interface HomePageProps {
@@ -9,16 +10,10 @@ interface HomePageProps {
 	token: string | null;
 }
 
-interface SpotifyItem {
-	name: string;
-	artists: { name: string }[];
-	album: {
-		images: { url: string }[];
-	};
-}
-
 const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	const [timeRange, setTimeRange] = useState('medium_term');
+	const [forDownload, setForDownload] = useState(false);
+
 	const [category, setCategory] = useState('tracks');
 	const [albumImageUrl, setAlbumUrl] = useState(
 		'https://i.scdn.co/image/ab67616d0000b273c5649add07ed3720be9d5526'
@@ -84,6 +79,21 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 		fetchTopTracks();
 	}, [token, timeRange, category, fetchTopTracks]);
 
+	useEffect(() => {
+		const handleWindowLoad = () => {
+			const contentElement = document.getElementById('JwrappedContent');
+			if (contentElement) {
+				downloadDivContent(contentElement);
+			}
+		};
+
+		window.addEventListener('load', handleWindowLoad);
+
+		return () => {
+			window.removeEventListener('load', handleWindowLoad);
+		};
+	});
+
 	const downloadDivContent = async (contentElement: HTMLElement) => {
 		const clone = contentElement.cloneNode(true) as HTMLElement;
 		clone.style.position = 'absolute';
@@ -104,23 +114,22 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 				useCORS: true,
 				allowTaint: true,
 			});
-
 			document.body.removeChild(clone);
-
 			const imageData = canvas.toDataURL('image/png');
 			const downloadLink = document.createElement('a');
-
 			downloadLink.href = imageData;
 			downloadLink.download = `JWRAPPED_${category}_${timeRange}.png`;
 			document.body.appendChild(downloadLink);
 			downloadLink.click();
 			document.body.removeChild(downloadLink);
+			setForDownload(false);
 		} catch (error) {
 			console.error('Error capturing content:', error);
 		}
 	};
 
 	const handleDownload = () => {
+		setForDownload(true); // Call setForDownload function to update the state to true
 		setTimeout(() => {
 			const contentElement = document.getElementById('JwrappedContent');
 			if (contentElement) {
@@ -128,6 +137,19 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 			}
 		}, 1000);
 	};
+
+	const buttonData = [
+		{
+			label: 'Download YOUR JWRAPPED',
+			onClick: handleDownload,
+			ariaLabel: 'Download YOUR JWRAPPED',
+		},
+		{
+			label: 'logout',
+			onClick: logout,
+			ariaLabel: 'logout',
+		},
+	];
 
 	return (
 		<div className="bg-beige w-full lg:pt-5">
@@ -140,6 +162,7 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 							category={category}
 							timeRange={timeRange}
 							albumImageUrl={albumImageUrl}
+							forDownload={forDownload}
 						/>
 					</div>
 					<div className="flex flex-col justify-center">
@@ -149,24 +172,23 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 							setCategory={setCategory}
 							setTimeRange={setTimeRange}
 						/>
-						<div className="flex flex-col lg:flex-row lg:place-self-end lg:gap-4">
-							<button
-								onClick={handleDownload}
-								className="font-Monotage w-full lg:w-fit text-darkgreen bg-white border-4 border-darkgreen lg:text-[1.5rem] px-20 rounded-[10px] mt-4 hover:bg-darkgreen hover:text-white"
-								aria-label="Download YOUR JWRAPPED"
-							>
-								Download YOUR JWRAPPED
-							</button>
-							<button
-								className="font-Monotage w-full lg:w-fit text-darkgreen bg-white border-4 border-darkgreen lg:text-[1.5rem] px-20 rounded-[10px] mt-4 hover:bg-darkgreen hover:text-white"
-								onClick={logout}
-								aria-label="logout"
-							>
-								logout
-							</button>
+						<div className="font-Monotage flex flex-col lg:flex-row lg:place-self-end lg:gap-4">
+							{buttonData.map((button, index) => (
+								<button
+									key={index}
+									onClick={button.onClick}
+									className="w-full lg:w-fit text-darkgreen bg-white border-4 border-darkgreen lg:text-[1.5rem] px-20 rounded-[10px] mt-4 hover:bg-darkgreen hover:text-white"
+									aria-label={button.ariaLabel}
+								>
+									{button.label}
+								</button>
+							))}
 						</div>
 					</div>
 				</div>
+			</div>
+			<div>
+				<ContactMe />
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PictureImage from '../../public/Image/picture.jpg';
-import { FaFacebookF, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaInstagram, FaFacebookF, FaGithub, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
 
 const socialIconsData = [
@@ -40,12 +40,13 @@ const ContactMe = () => {
 						href="https://open.spotify.com/user/12140322647"
 						aria-label="Link to Spotify profile"
 					>
-						<div className="relative h-60 w-60 rounded-full border-4 border-darkgreen align-top hover:animate-spin">
+						<div className="relative h-60 w-60 rounded-full border-4 border-darkgreen align-top active:animate-spin">
 							<Image
 								src={PictureImage}
 								alt="Jay Picture"
 								className="object-cover rounded-full"
 								draggable={false}
+								sizes="(max-width: 240px)"
 								fill
 							/>
 						</div>

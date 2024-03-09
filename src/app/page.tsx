@@ -47,15 +47,10 @@ const Home: React.FC = () => {
 
 	return (
 		<main className="bg-beige w-full pt-5">
-			{' '}
 			{!token ? (
-				<div>
-					<LoginPage data={SpotifiyConfigData} />
-				</div>
+				<LoginPage data={SpotifiyConfigData} />
 			) : (
-				<div className="w-full">
-					<HomePage logout={logout} token={token} />
-				</div>
+				<HomePage logout={logout} token={token} />
 			)}
 		</main>
 	);

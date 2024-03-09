@@ -14,16 +14,17 @@ const PrivacyPolicySection = () => {
 	return (
 		<div>
 			<div className="w-full flex flex-col md:flex-row justify-between items-center text-darkgreen">
-				<h2 className="font-Monotage text-center md:text-left md:justify-self-start leading-none text-[6rem] md:text-[10rem] lg:text-[17rem] ">
+				<h2 className="font-Monotage text-center md:text-left md:justify-self-start leading-none text-[4rem] md:text-[10rem] lg:text-[17rem] ">
 					Privacy Policy
 				</h2>
-				<div className="relative justify-self-end w-[20rem] lg:w-[40rem] h-fit mr-10">
+				<div className="relative justify-self-center lg:justify-self-end w-[10rem] md:w-[20rem] lg:w-[40rem] h-fit mr-10">
 					<Image
 						src={LogoImage}
 						alt="Jwrpped Logo"
-						className="object-cover rounded-[60px]"
+						className="object-cover"
 						placeholder="blur"
 						draggable={false}
+						sizes="(max-width: 640px)"
 						priority
 					/>
 				</div>

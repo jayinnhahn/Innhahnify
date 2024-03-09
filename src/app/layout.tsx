@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
 import './globals.css';
+
+import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Roboto } from 'next/font/google';
 export const metadata: Metadata = {
 	title: 'Jwrapped',
-	description: 'Get your top tracks/artists',
+	description: 'Generate a Spotify Wrapped-style summary.',
 };
 
 const Monotage = localFont({
@@ -29,8 +30,10 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={`${Monotage.variable} ${roboto.className}`}>
-			<body>{children}</body>
+		<html lang="en">
+			<body className={`${Monotage.variable} ${roboto.className}`}>
+				{children}
+			</body>
 		</html>
 	);
 }

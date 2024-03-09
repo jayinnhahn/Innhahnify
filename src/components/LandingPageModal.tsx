@@ -8,15 +8,15 @@ interface LandingPageModalProps {
 
 const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 	return (
-		<div className="relative flex justify-center px-4 py-4 h-[25rem] lg:h-[40rem] rounded-3xl overflow-hidden">
-			<div className="absolute inset-0">
+		<div className="relative flex justify-center px-4 py-4 h-[20rem] lg:h-[40rem] rounded-3xl overflow-hidden">
+			<div className="max-w-full aspect-w-1080 aspect-h-576">
 				<Image
 					src={LandingPageImage}
 					alt="Landing Page Image of a Singer"
-					layout="fill"
-					objectFit="cover"
 					placeholder="blur"
 					draggable={false}
+					layout="fill"
+					objectFit="cover"
 				/>
 			</div>
 			<div className="flex flex-col justify-center items-center z-10 text-white">
