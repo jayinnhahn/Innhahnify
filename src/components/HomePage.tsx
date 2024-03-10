@@ -20,6 +20,7 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	);
 	const [top5Tracks, setTopTracks] = useState([]);
 	const [top5Artists, setTopArtists] = useState([]);
+	const [tokenExpired, setTokenExpired] = useState(false); // New state to track token expiration
 
 	const fetchDataFromSpotify = async (
 		accessToken: string,
@@ -51,8 +52,8 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 			}
 			const tokenExpiration = localStorage.getItem('spotify_token_expires');
 			if (tokenExpiration && Date.now() > Number(tokenExpiration)) {
-				logout();
-				alert('Your Spotify token has expired. Please log in again.');
+				setTokenExpired(true); // Set tokenExpired to true if token is expired
+				logout;
 				return;
 			}
 			const topTracksData = await fetchDataFromSpotify(
@@ -105,10 +106,8 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 			const element = allElements[i] as HTMLElement;
 			element.style.zIndex = '1';
 		}
-
 		try {
 			await new Promise((resolve) => setTimeout(resolve, 500));
-
 			const canvas = await html2canvas(clone, {
 				scale: 2,
 				useCORS: true,
@@ -129,7 +128,7 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	};
 
 	const handleDownload = () => {
-		setForDownload(true); // Call setForDownload function to update the state to true
+		setForDownload(true);
 		setTimeout(() => {
 			const contentElement = document.getElementById('JwrappedContent');
 			if (contentElement) {
@@ -153,9 +152,14 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 
 	return (
 		<div className="bg-beige w-full lg:pt-5">
+			{tokenExpired && ( // Render a message if the token is expired
+				<div className="text-red-500 font-bold p-3">
+					Your Spotify token has expired. Please log in again.
+				</div>
+			)}
 			<div className="flex flex-col items-center justify-center">
 				<div className="grid grid-cols-1 lg:grid-cols-2 lg:px-20 lg:gap-4 px-5 gap-y-5">
-					<div className="lg:my-5">
+					<div className="lg:my-5 flex justify-self-center">
 						<ResultsModal
 							top5Tracks={top5Tracks}
 							top5Artists={top5Artists}

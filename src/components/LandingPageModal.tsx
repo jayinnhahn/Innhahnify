@@ -15,8 +15,8 @@ const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 					alt="Landing Page Image of a Singer"
 					placeholder="blur"
 					draggable={false}
-					layout="fill"
 					objectFit="cover"
+					fill
 				/>
 			</div>
 			<div className="flex flex-col justify-center items-center z-10 text-white">
