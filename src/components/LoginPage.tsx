@@ -5,7 +5,6 @@ import AboutModal from '@/components/AboutModal';
 import PrivacyPolicySection from '@/components/PrivacyPolicySection';
 import ContactMe from '@/components/ContactMe';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { motion } from 'framer-motion';
 
 interface LoginPageProps {
 	data: {
@@ -27,11 +26,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 		deleteSpeed: 80,
 	});
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-		>
+		<div>
 			<header className="bg-beige w-full pt-5 scroll-smooth">
 				<div className="flex flex-col align-center items-center justify-center">
 					<h1 className="text-darkgreen font-Monotage text-center text-newgreen text-[4rem] md:text-[6rem] lg:text-[11rem] tracking-wide font-bold lg:w-[48rem] leading-none mb-5 ">
@@ -49,32 +44,21 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 				<Breaker />
 			</nav>
 			<main>
-				<motion.section
-					initial={{ x: -100, opacity: 0 }}
-					animate={{ x: 0, opacity: 1 }}
-					transition={{ duration: 0.5 }}
-				>
-					<div className="px-4 md:px-8 lg:px-20">
-						<AboutModal />
-					</div>
-				</motion.section>
+				<div className="px-4 md:px-8 lg:px-20">
+					<AboutModal />
+				</div>
 				<nav>
 					<Breaker />
 				</nav>
-				<motion.section
-					initial={{ x: 100, opacity: 0 }}
-					animate={{ x: 0, opacity: 1 }}
-					transition={{ duration: 0.5, delay: 0.3 }}
-				>
-					<div className="px-4 md:px-8 lg:px-20">
-						<PrivacyPolicySection />
-					</div>
-				</motion.section>
+
+				<div className="px-4 md:px-8 lg:px-20">
+					<PrivacyPolicySection />
+				</div>
 			</main>
 			<footer>
 				<ContactMe />
 			</footer>
-		</motion.div>
+		</div>
 	);
 };
 

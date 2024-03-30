@@ -21,6 +21,10 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	const [top5Tracks, setTopTracks] = useState([]);
 	const [top5Artists, setTopArtists] = useState([]);
 	const [tokenExpired, setTokenExpired] = useState(false); // New state to track token expiration
+	const [userName, setUserName] = useState('');
+	const [userImage, setUserImage] = useState(
+		'https://i.scdn.co/image/ab67616d0000b273c5649add07ed3720be9d5526'
+	);
 
 	const fetchDataFromSpotify = async (
 		accessToken: string,
@@ -76,8 +80,37 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 		}
 	}, [token, timeRange, category, logout]);
 
+	const fetchUserProfile = async (accessToken: string) => {
+		try {
+			const response = await axios.get('https://api.spotify.com/v1/me', {
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+					'Content-Type': 'application/json',
+				},
+			});
+			setUserName(response.data.display_name);
+
+			// Get the largest image size from the images array
+			const images = response.data.images;
+			if (images && images.length > 0) {
+				let largestImage = images[0];
+				for (let i = 1; i < images.length; i++) {
+					if (images[i].width > largestImage.width) {
+						largestImage = images[i];
+					}
+				}
+				setUserImage(largestImage.url);
+			}
+		} catch (error) {
+			console.error('Error fetching user profile:', error);
+		}
+	};
+
 	useEffect(() => {
 		fetchTopTracks();
+		if (token) {
+			fetchUserProfile(token);
+		}
 	}, [token, timeRange, category, fetchTopTracks]);
 
 	useEffect(() => {
@@ -167,6 +200,8 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 							timeRange={timeRange}
 							albumImageUrl={albumImageUrl}
 							forDownload={forDownload}
+							// userName={userName}
+							// userImage={userImage}
 						/>
 					</div>
 					<div className="flex flex-col justify-center">

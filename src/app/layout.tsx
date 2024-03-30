@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Roboto } from 'next/font/google';
+
 export const metadata: Metadata = {
 	title: 'Jwrapped',
 	description: 'Generate a Spotify Wrapped-style summary.',

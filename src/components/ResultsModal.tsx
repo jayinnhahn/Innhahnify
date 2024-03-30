@@ -34,7 +34,7 @@ const ResultsModal: React.FC<ResultsModalProps> = ({
 	return (
 		<div
 			id="JwrappedContent"
-			className={`relative grid p-8 w-[22.5rem] h-[43.75rem]`}
+			className={`relative grid p-8 w-fit h-[43.75rem]`}
 		>
 			<Image
 				src={albumImageUrl}
@@ -45,7 +45,7 @@ const ResultsModal: React.FC<ResultsModalProps> = ({
 				draggable={false}
 				fill
 			/>
-			<div className="absolute top-0 left-0 w-[22.5rem] h-full bg-darkgreen opacity-90"></div>
+			<div className="absolute top-0 left-0 w-full h-full bg-darkgreen opacity-90"></div>
 			<div className="grid content-between mt-0 z-10">
 				<div
 					className={`grid relative justify-self-end text-right text-white w-full flex-wrap ${
@@ -78,11 +78,11 @@ const ResultsModal: React.FC<ResultsModalProps> = ({
 									</div>
 							  ))}
 					</div>
-					<div className="relative justify-self-end self-end w-[2.5rem] h-[2.5rem]">
+					<div className="relative justify-self-end self-end w-[2rem] h-[2rem] lg:[2.5rem] lg:[2.5rem]">
 						<Image
 							src={SpotifyLogo}
 							alt="RecWeekHeaderImage"
-							className="object-cover"
+							className="object-cover brightness-25 z-1 w-full h-full"
 							placeholder="blur"
 							draggable={false}
 						/>

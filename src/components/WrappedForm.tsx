@@ -41,7 +41,7 @@ const WrappedForm: React.FC<WrappedFormProps> = ({
 			<h2 className="text-beige font-Monotage text-left text-newgreen text-[1.5rem] lg:text-[3rem] font-normal leading-none mb-4">
 				WHAT CATEGORY WOULD YOU LIKE?
 			</h2>
-			<div className="flex ml-4 mb-4">
+			<div className="grid grid-flow-col lg:ml-4 lg:justify-none mb-2 md:mb-4">
 				<button
 					className={`px-4 py-2 text-[1rem] rounded-l-[5px] lg:px-10  lg:text-[2rem] font-Monotage lg:rounded-l-[15px] lg:border-4 border-darkgreen ${
 						category === 'tracks'
@@ -64,14 +64,14 @@ const WrappedForm: React.FC<WrappedFormProps> = ({
 				</button>
 			</div>
 			<div className="flex flex-col">
-				<h2 className="text-beige font-Monotage text-left text-[1.5rem] lg:text-[3rem] font-normal leading-none mb-4">
+				<h2 className="text-beige font-Monotage text-left text-[1rem] lg:text-[3rem] font-normal leading-none mb-4">
 					What time period would your wrapped consist of?
 				</h2>
-				<div className="flex gap-4 mb-4">
+				<div className="grid grid-flow-col gap-2 md:gap-4 mb-4">
 					{timeRangeOptions.map(({ label, value }) => (
 						<div
 							key={value}
-							className={`flex py-[0.5rem] px-[1rem] lg:px-[3rem] rounded-[10px] lg:rounded-[15px] font-Monotage border-2 border-round border-darkgreen
+							className={`flex py-[0.5rem] px-[1rem] lg:px-[3rem] rounded-[10px] lg:rounded-[15px] font-Monotage border-2 border-round border-darkgreen justify-center
               ${
 								timeRange === value
 									? 'bg-darkgreen text-white'
@@ -88,7 +88,7 @@ const WrappedForm: React.FC<WrappedFormProps> = ({
 							/>
 							<label
 								htmlFor={value}
-								className="block lg:text-[1.5rem] font-medium"
+								className="text-center text-[1rem] lg:text-[1.5rem] font-medium text-wrap"
 							>
 								{label}
 							</label>

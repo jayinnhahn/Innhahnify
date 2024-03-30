@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import LogoImage from '../../public/Image/Jwrppedlogo.png';
+import { motion, animate } from 'framer-motion';
+import { inView } from 'framer-motion';
 
 const PrivacyPolicySection = () => {
 	const policies = [
@@ -11,12 +13,28 @@ const PrivacyPolicySection = () => {
 		'- All information obtained from Spotify is used exclusively for the purpose of generating your Wrapped Spotify Data on Jwrapped.',
 	];
 
+	React.useEffect(() => {
+		const unsubscribe = inView('div', (info) => {
+			// Animate the section when it enters the viewport
+			animate(info.target, { scale: 1 });
+
+			return () => {
+				animate(info.target, { scale: 0 });
+			};
+		});
+
+		return unsubscribe;
+	}, []);
+
 	return (
 		<div>
 			<div className="w-full flex flex-col md:flex-row justify-between items-center text-darkgreen">
-				<h2 className="font-Monotage text-center md:text-left md:justify-self-start leading-none text-[4rem] md:text-[10rem] lg:text-[17rem] ">
+				<motion.div
+					initial={{ scale: 0 }}
+					className="font-Monotage text-center md:text-left md:justify-self-start leading-none text-[4rem] md:text-[10rem] lg:text-[17rem]"
+				>
 					Privacy Policy
-				</h2>
+				</motion.div>
 				<div className="relative justify-self-center lg:justify-self-end w-[10rem] md:w-[20rem] lg:w-[40rem] h-fit mr-10">
 					<Image
 						src={LogoImage}
@@ -37,7 +55,7 @@ const PrivacyPolicySection = () => {
 							key={index}
 							className="text-[1.25rem] lg:text-[1.75rem] font-medium mb-2"
 						>
-							{policy}
+							<motion.div initial={{ scale: 0 }}>{policy}</motion.div>
 						</li>
 					))}
 				</ul>
