@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import WrappedForm from '@/components/WrappedForm';
-import ResultsModal from '@/components/ResultsModal';
-import ContactMe from '@/components/ContactMe';
+import { WrappedForm, ResultsModal, ContactMeSection } from "@/components"
 import html2canvas from 'html2canvas';
 
 interface HomePageProps {
@@ -20,7 +18,7 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 	);
 	const [top5Tracks, setTopTracks] = useState([]);
 	const [top5Artists, setTopArtists] = useState([]);
-	const [tokenExpired, setTokenExpired] = useState(false); // New state to track token expiration
+	const [tokenExpired, setTokenExpired] = useState(false); 
 	const [userName, setUserName] = useState('');
 	const [userImage, setUserImage] = useState(
 		'https://i.scdn.co/image/ab67616d0000b273c5649add07ed3720be9d5526'
@@ -227,7 +225,7 @@ const HomePage: React.FC<HomePageProps> = ({ logout, token }) => {
 				</div>
 			</div>
 			<div>
-				<ContactMe />
+				<ContactMeSection />
 			</div>
 		</div>
 	);

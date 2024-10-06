@@ -1,11 +1,6 @@
 import React from 'react';
-import LandingPageModal from '@/components/LandingPageModal';
-import Breaker from '@/components/Breaker';
-import AboutModal from '@/components/AboutModal';
-import PrivacyPolicySection from '@/components/PrivacyPolicySection';
-import ContactMe from '@/components/ContactMe';
+import { ContactMeSection, AboutSection, PrivacyPolicySection, Breaker, LandingPageModal, Divider } from '@/components';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-
 interface LoginPageProps {
 	data: {
 		CLIENT_ID?: string;
@@ -18,6 +13,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 	const handleLogin = () => {
 		const authUrl = `${data.AUTH_ENDPOINT}?client_id=${data.CLIENT_ID}&redirect_uri=${data.REDIRECT_URL}&response_type=${data.RESPONSE_TYPE}&scope=user-top-read`;
 		window.location.href = authUrl;
+		console.log(authUrl)
 	};
 	const [Words] = useTypewriter({
 		words: ['TRACKS', 'ARTISTS'],
@@ -38,25 +34,21 @@ const LoginPage: React.FC<LoginPageProps> = ({ data }) => {
 				</div>
 				<div className="px-4 md:px-8 lg:px-20">
 					<LandingPageModal onLogin={handleLogin} />
+					<Divider/>
 				</div>
 			</header>
-			<nav>
-				<Breaker />
-			</nav>
 			<main>
 				<div className="px-4 md:px-8 lg:px-20">
-					<AboutModal />
+					<AboutSection />
 				</div>
-				<nav>
-					<Breaker />
-				</nav>
+				<Breaker/>
 
 				<div className="px-4 md:px-8 lg:px-20">
 					<PrivacyPolicySection />
 				</div>
 			</main>
 			<footer>
-				<ContactMe />
+				<ContactMeSection />
 			</footer>
 		</div>
 	);

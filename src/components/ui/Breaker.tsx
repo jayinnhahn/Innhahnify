@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Breaker = () => {
+export const Breaker = () => {
 	const BreakerText = [
 		'EXPLORE YOUR MUSICAL TASTE',
 		'EXPERIENCE CREATIVITY IN SIMPLICITY',
@@ -44,7 +44,7 @@ const Breaker = () => {
 			</div>
 			<div className="my-6 relative flex overflow-hidden">
 				<motion.div
-					className="flex animate-marqueereverse whitespace-nowrap"
+					className="flex flex-end animate-marqueereverse whitespace-nowrap"
 					animate={{
 						x: [200, 100, 0, -100],
 						y: [-100, 0, 100, 0],
@@ -59,4 +59,3 @@ const Breaker = () => {
 	);
 };
 
-export default Breaker;

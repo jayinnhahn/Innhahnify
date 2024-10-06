@@ -1,6 +1,7 @@
 import React from 'react';
-import LogoImage from '../../public/Image/Jwrppedlogo.png';
+import LogoImage from '@/../public/Image/Jwrppedlogo.png';
 import Image from 'next/image';
+
 interface WrappedFormProps {
 	category: string;
 	timeRange: string;
@@ -14,7 +15,7 @@ const timeRangeOptions = [
 	{ label: 'All Time', value: 'long_term' },
 ];
 
-const WrappedForm: React.FC<WrappedFormProps> = ({
+export const WrappedForm: React.FC<WrappedFormProps> = ({
 	category,
 	timeRange,
 	setCategory,
@@ -64,7 +65,7 @@ const WrappedForm: React.FC<WrappedFormProps> = ({
 				</button>
 			</div>
 			<div className="flex flex-col">
-				<h2 className="text-beige font-Monotage text-left text-[1rem] lg:text-[3rem] font-normal leading-none mb-4">
+				<h2 className="text-beige font-Monotage text-left text-[1rem] lg:text-[2rem] font-normal leading-none mb-4">
 					What time period would your wrapped consist of?
 				</h2>
 				<div className="grid grid-flow-col gap-2 md:gap-4 mb-4">
@@ -100,4 +101,3 @@ const WrappedForm: React.FC<WrappedFormProps> = ({
 	);
 };
 
-export default WrappedForm;

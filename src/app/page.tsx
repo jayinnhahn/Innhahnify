@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import LoginPage from '@/components/LoginPage';
-import HomePage from '@/components/HomePage';
+import LoginPage from '@/pages/LoginPage';
+import HomePage from '@/pages/HomePage';
 interface SpotifyConfig {
 	CLIENT_ID?: string;
 	REDIRECT_URL?: string;

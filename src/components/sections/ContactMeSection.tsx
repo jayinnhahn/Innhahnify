@@ -1,9 +1,9 @@
 import React from 'react';
-import PictureImage from '../../public/Image/picture.jpg';
+import PictureImage from '@/../public/Image/picture.jpg';
 import { FaInstagram, FaFacebookF, FaGithub, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
 import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
+
 const socialIconsData = [
 	{
 		url: 'https://www.facebook.com/jayinnhahn',
@@ -23,36 +23,26 @@ const socialIconsData = [
 	},
 ];
 
-const ContactMe = () => {
+export const ContactMeSection = () => {
 	const controls = useAnimation();
 
-	useEffect(() => {
-		const handleInView = (inView: boolean) => {
-			if (inView) {
-				controls.start({ translateY: 0, opacity: 1 });
-			} else {
-				controls.start({ translateY: 100, opacity: 0 });
-			}
-		};
-
-		handleInView(true);
-
-		return () => {
-			controls.stop();
-		};
-	}, [controls]);
+	const handleInView = (inView: boolean) => {
+		if (inView) {
+			controls.start({ rotate: 0, scale: 1 });
+		} 
+	};
 
 	return (
 		<motion.div
 			initial={{ translateY: 100, opacity: 0 }}
-			animate={controls}
+			animate={{ translateY: 0, opacity: 1 }} 
 			transition={{
 				type: 'spring',
 				stiffness: 260,
 				damping: 20,
 			}}
-		>
-			<div className="bg-green rounded-t-[20px] lg:rounded-t-[40px] h-fit mt-10">
+			onViewportEnter={() => handleInView(true)}
+			className="bg-green rounded-t-[20px] lg:rounded-t-[40px] h-fit mt-10">
 				<div className="grid grid-cols-1 md:grid-cols-2 py-4 px-8 md:px-16 md:py-8  gap-8 lg:gap-16 justify-between w-full">
 					<div className="">
 						<h2 className="font-Monotage text-beige justify-self-start leading-none text-center md:text-left text-[4rem] md:text-[6rem] lg:text-[11rem]">
@@ -96,9 +86,6 @@ const ContactMe = () => {
 						</div>
 					</div>
 				</div>
-			</div>
 		</motion.div>
 	);
 };
-
-export default ContactMe;

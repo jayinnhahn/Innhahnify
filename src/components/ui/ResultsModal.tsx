@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import SpotifyLogo from '../../public/Image/spotifylogo.png';
+import SpotifyLogo from '@/../public/Image/spotifylogo.png';
 
 interface ResultsModalProps {
 	top5Tracks: string[];
@@ -8,10 +8,10 @@ interface ResultsModalProps {
 	category: string;
 	timeRange: string;
 	albumImageUrl: string;
-	forDownload: boolean; // Declare forDownload prop
+	forDownload: boolean; 
 }
 
-const ResultsModal: React.FC<ResultsModalProps> = ({
+export const ResultsModal: React.FC<ResultsModalProps> = ({
 	top5Tracks,
 	top5Artists,
 	category,
@@ -93,4 +93,3 @@ const ResultsModal: React.FC<ResultsModalProps> = ({
 	);
 };
 
-export default ResultsModal;

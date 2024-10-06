@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
-import LandingPageImage from '../../public/Image/LandingPageImage.png';
+import LandingPageImage from '@/../public/Image/LandingPageImage.png';
 import { motion, useAnimation } from 'framer-motion';
 
 interface LandingPageModalProps {
 	onLogin: () => void;
 }
 
-const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
+export const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 	const controls = useAnimation();
+
+	useEffect(() => {
+		// Call controls.start after the component has mounted
+		controls.start({ rotate: 0, scale: 1 });
+	}, [controls]);
 
 	const handleInView = (inView: boolean) => {
 		if (inView) {
 			controls.start({ rotate: 0, scale: 1 });
-		} else {
-			controls.start({ rotate: 0, scale: 0 });
-		}
+		} 
 	};
 
 	return (
@@ -28,7 +31,6 @@ const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 				damping: 20,
 			}}
 			onViewportEnter={() => handleInView(true)}
-			onViewportLeave={() => handleInView(false)}
 		>
 			<div className="relative flex justify-center px-4 py-4 h-[20rem] lg:h-[40rem] rounded-3xl overflow-hidden">
 				<div className="max-w-full aspect-w-1080 aspect-h-576">
@@ -61,5 +63,3 @@ const LandingPageModal: React.FC<LandingPageModalProps> = ({ onLogin }) => {
 		</motion.div>
 	);
 };
-
-export default LandingPageModal;
